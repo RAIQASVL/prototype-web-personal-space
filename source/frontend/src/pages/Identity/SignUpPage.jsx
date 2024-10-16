@@ -1,17 +1,28 @@
 import { motion } from "framer-motion";
 import Input from "../../components/Input";
-import { User, Mail, Lock } from "lucide-react";
+import { User, Mail, Lock, Loader } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PasswordStrengthMeter from "../../components/PasswordStrengthMeter";
+import { useAuthStore } from "../../store/authStore";
 
 const SignUpPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  const handleSignUp = (e) => {
+  const { signup, error, isLoading } = useAuthStore();
+
+  const handleSignUp = async (e) => {
     e.preventDefault();
+
+    try {
+      await signup(email, password, name);
+      navigate("/verify-email");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -21,7 +32,7 @@ const SignUpPage = () => {
       transition={{ duration: 0.5 }}
       className="max-w-md w-full bg-transparent bg-opacity-50 backdrop-filter backdrop-blur-xl rounded-full shadow-xl overflow-hidden"
     >
-      <div className="p-20">
+      <div className="p-20 pb-8">
         <h2 className="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-gray-800 to-gray-400 text-transparent bg-clip-text">
           ACCOUNT
         </h2>
@@ -48,7 +59,11 @@ const SignUpPage = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-
+          {error && (
+            <p className="text-center text-red-500 font-semibold mt-2">
+              {error}
+            </p>
+          )}
           <PasswordStrengthMeter password={password} />
 
           <motion.button
@@ -58,15 +73,23 @@ const SignUpPage = () => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.98 }}
             type="submit"
+            disabled={isLoading}
           >
-            CREATION
+            {isLoading ? (
+              <Loader className=" animate-spin mx-auto" size={24} />
+            ) : (
+              "CREATION"
+            )}
           </motion.button>
         </form>
       </div>
       <div className="px-8 pb-10 bg-transparent flex justify-center">
         <p className="text-sm text-black">
           already have an account?{" "}
-          <Link to={"/login"} className="text-gray-500 hover:text-black">
+          <Link
+            to={"/login"}
+            className="flex justify-center text-gray-500 hover:text-black"
+          >
             LOGIN
           </Link>
         </p>

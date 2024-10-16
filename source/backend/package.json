@@ -2,12 +2,12 @@
   "name": "aquonelocal-global-space",
   "version": "1.0.0",
   "description": "## Project Overview",
-  "main": "src/backend/index.js",
+  "main": "index.js",
   "directories": {
     "test": "tests"
   },
   "scripts": {
-    "dev": "nodemon src/backend/index.js"
+    "dev": "NODE_ENV=development nodemon index.js"
   },
   "keywords": [],
   "author": "",

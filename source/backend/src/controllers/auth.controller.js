@@ -15,14 +15,14 @@ export const signup = async (req, res) => {
 
     try {
         if (!email || !password || !name) {
-            throw new Error("All fields are required");
+            throw new Error("all fields are required");
         }
 
         const userAlreadyExists = await User.findOne({ email });
         console.log("userAlreadyExists", userAlreadyExists);
 
         if (userAlreadyExists) {
-            return res.status(400).json({ success: false, message: "User already exists" });
+            return res.status(400).json({ success: false, message: "user already exists" });
         }
 
         const hashedPassword = await bcryptjs.hash(password, 10);
@@ -45,7 +45,7 @@ export const signup = async (req, res) => {
 
         res.status(201).json({
             success: true,
-            message: "User created successfully",
+            message: "user created successfully",
             user: {
                 ...user._doc,
                 password: undefined,
@@ -65,7 +65,7 @@ export const verifyEmail = async (req, res) => {
         });
 
         if (!user) {
-            return res.status(400).json({ success: false, message: "Invalid or expired verification code" });
+            return res.status(400).json({ success: false, message: "invalid or expired verification code" });
         }
 
         user.isVerified = true;
@@ -85,7 +85,7 @@ export const verifyEmail = async (req, res) => {
         });
     } catch (error) {
         console.log("error in verifyEmail ", error);
-        res.status(500).json({ success: false, message: "Server error" });
+        res.status(500).json({ success: false, message: "server error" });
     }
 };
 
@@ -94,11 +94,11 @@ export const login = async (req, res) => {
     try {
         const user = await User.findOne({ email });
         if (!user) {
-            return res.status(400).json({ success: false, message: "Invalid credentials" });
+            return res.status(400).json({ success: false, message: "invalid credentials" });
         }
         const isPasswordValid = await bcryptjs.compare(password, user.password);
         if (!isPasswordValid) {
-            return res.status(400).json({ success: false, message: "Invalid credentials" });
+            return res.status(400).json({ success: false, message: "invalid credentials" });
         }
 
         generateTokenAndSetCookie(res, user._id);
@@ -188,7 +188,7 @@ export const checkAuth = async (req, res) => {
     try {
         const user = await User.findById(req.userId).select("-password");
         if (!user) {
-            return res.status(400).json({ success: false, message: "User not found" });
+            return res.status(400).json({ success: false, message: "user not found" });
         }
 
         res.status(200).json({ success: true, user });
