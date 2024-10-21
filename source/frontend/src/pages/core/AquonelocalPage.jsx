@@ -1,9 +1,17 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const AquonelocalPage = () => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/contexts");
+  };
+
   return (
     <motion.div
       className="absolute flex items-center justify-center rounded-full border border-white backdrop-blur-md"
+      onClick={handleClick}
       style={{
         width: "300px", // Circle size
         height: "300px",

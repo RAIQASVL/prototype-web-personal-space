@@ -13,6 +13,8 @@ import LoadingSpinner from "./components/LoadingSpinner";
 import { Toaster } from "react-hot-toast";
 import { useAuthStore } from "./store/authStore";
 import { useEffect } from "react";
+import AquonelocalPage from "./pages/core/AquonelocalPage";
+import ContextObjectsPage from "./pages/core/ContextObjectsPage";
 
 // Protect routes that require authentication, but not Dashboard as default
 const ProtectedRoute = ({ children }) => {
@@ -88,8 +90,11 @@ function App() {
         left="-10%"
         delay={2}
       />
+      {/* Core Pages as INTRO */}
       <Routes>
-        {/* Main Dashboard as default */}
+        <Route path="/intro" element={<AquonelocalPage />} />
+        <Route path="/contexts" element={<ContextObjectsPage />} />
+        {/* Identity Pages */}
         <Route
           path="/"
           element={
