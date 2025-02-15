@@ -1,8 +1,8 @@
-# Aquone Local Global Space
+# Local Global Space
 
 ## Project Overview
 
-**Aquone Local Global Space** is a modular and scalable platform that integrates multiple personal and professional contexts into a unified digital space. The project is built with a clean, minimalistic aesthetic, focusing on smooth user experience and seamless navigation. It will serve as a central hub for various contexts, including yoga, sound, technology, education, and more.
+**Local Global Space** is a modular and scalable platform that integrates multiple personal and professional contexts into a unified digital space. The project is built with a clean, minimalistic aesthetic, focusing on smooth user experience and seamless navigation. It will serve as a central hub for various contexts, including yoga, sound, technology, education, and more.
 
 This platform is designed with scalability and future integration in mind. Initially, it will be a web application, but will later extend to mobile devices and Telegram Mini Apps. The architecture will adhere to clean code principles and design patterns, ensuring modularity, ease of maintenance, and smooth future expansion.
 
@@ -47,5 +47,5 @@ To get started with the project:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/RAIQASVL/aquonelocal-global-space.git
+   git clone https://github.com/RAIQASVL/prototype-web-personal-space.git
    ```
